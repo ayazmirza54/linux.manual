@@ -33,6 +33,41 @@
     recentGroup: $('#recent-group')
   };
 
+  /* ------------------------------------------------------------ the caret */
+
+  // A block caret that follows the real insertion point. The measure span
+  // holds the text left of the caret, so the block lands exactly where the
+  // native one would; the whole thing is shifted by the input's scrollLeft so
+  // it stays put once the line is long enough to scroll.
+  var caret = { box: $('#prompt-caret'), measure: $('#caret-measure'), timer: null };
+
+  function syncCaret() {
+    var value = el.prompt.value;
+    var at = el.prompt.selectionStart;
+    caret.measure.textContent = value.slice(0, at === null ? value.length : at);
+    caret.box.style.transform = 'translateX(' + -el.prompt.scrollLeft + 'px)';
+  }
+
+  // selectionStart is still the pre-key value during keydown, so re-read next frame.
+  function syncCaretSoon() { requestAnimationFrame(syncCaret); }
+
+  // Programmatic writes do not fire 'input', so they go through here.
+  function setPrompt(value) {
+    el.prompt.value = value;
+    syncCaret();
+  }
+
+  function caretTyping() {
+    caret.box.classList.add('typing');
+    clearTimeout(caret.timer);
+    caret.timer = setTimeout(function () { caret.box.classList.remove('typing'); }, 420);
+  }
+
+  ['input', 'keyup', 'click', 'select', 'scroll'].forEach(function (evt) {
+    el.prompt.addEventListener(evt, syncCaret);
+  });
+  el.prompt.addEventListener('keydown', function () { caretTyping(); syncCaretSoon(); });
+
   /* ---------------------------------------------------------------- store */
 
   var store = {
@@ -221,7 +256,7 @@
     var it = sg.items[i];
     if (!it) return;
     closeSuggest();
-    el.prompt.value = '';
+    setPrompt('');
     if (it.href) go(it.href);
     else exec(it.run);
   }
@@ -243,7 +278,7 @@
     whoami:  { help: 'about this reference',           run: function () { go('#/about'); } },
     about:   { help: 'about this reference',           run: function () { go('#/about'); } },
     history: { help: 'recently opened pages',          run: function () { showHistory(); } },
-    exit:    { help: 'clear the prompt',               run: function () { el.prompt.value = ''; flash('nice try'); } }
+    exit:    { help: 'clear the prompt',               run: function () { setPrompt(''); flash('nice try'); } }
   };
   var BUILTIN_NAMES = Object.keys(BUILTINS);
 
@@ -330,7 +365,7 @@
         '<span class="line">[<span class="ok">ok</span>] loaded topic guides … <b>' + META.guides + '</b></span>' +
         '<span class="line">[<span class="ok">ok</span>] loaded tips … <b>' + META.tips + '</b></span>' +
         '<span class="line">[<span class="ok">ok</span>] network not required — everything is local</span>' +
-        '<span class="line">type a command or press <kbd>/</kbd> to search<span class="cursor"></span></span>' +
+        '<span class="line">type a command or press <kbd>/</kbd> to search</span>' +
       '</div>' +
 
       '<div class="cards">' +
@@ -636,7 +671,7 @@
     e.preventDefault();
     if (sg.open && sg.sel >= 0) return activateSuggest(sg.sel);
     var value = el.prompt.value;
-    el.prompt.value = '';
+    setPrompt('');
     closeSuggest();
     exec(value);
   });
@@ -652,17 +687,22 @@
     else if (e.key === 'ArrowUp') { e.preventDefault(); moveSuggest(-1); }
     else if (e.key === 'Escape') {
       if (sg.open) closeSuggest();
-      else { el.prompt.value = ''; el.prompt.blur(); }
+      else { setPrompt(''); el.prompt.blur(); }
     } else if (e.key === 'Tab' && sg.open && sg.items[sg.sel]) {
       e.preventDefault();
-      el.prompt.value = sg.items[sg.sel].name;
+      setPrompt(sg.items[sg.sel].name);
       openSuggest(el.prompt.value);
     }
   });
 
-  el.prompt.addEventListener('focus', function () { el.mode.textContent = 'INSERT'; });
+  el.prompt.addEventListener('focus', function () {
+    el.mode.textContent = 'INSERT';
+    caret.box.classList.remove('blurred');
+    syncCaret();
+  });
   el.prompt.addEventListener('blur', function () {
     el.mode.textContent = 'NORMAL';
+    caret.box.classList.add('blurred');
     setTimeout(closeSuggest, 120);
   });
 
@@ -749,6 +789,8 @@
     }).join('');
 
     renderRecent();
+    caret.box.classList.add('blurred');
+    syncCaret();
     if (!location.hash) location.replace('#/');
     render();
   }

@@ -261,17 +261,58 @@ body.no-crt .crt { display: none; }
 .ps1-at, .ps1-path { color: var(--fg-mute); }
 .ps1-host { color: var(--link); }
 
-.prompt-input {
+/* The prompt draws its own block caret: the native one is hidden and a block
+   is positioned after a hidden copy of the text up to the caret offset. The
+   font is monospace and both spans inherit it, so the two stay in step. */
+.prompt-wrap {
+  position: relative;
   flex: 1;
   min-width: 0;
+  display: block;
+  overflow: hidden;
+}
+
+.prompt-input {
+  display: block;
+  width: 100%;
   font: inherit;
   color: var(--fg);
   background: transparent;
   border: 0;
   outline: none;
-  caret-color: var(--accent);
+  caret-color: transparent;
 }
+/* Nudge the placeholder clear of the caret sitting at column 0. */
+.prompt-input:placeholder-shown { text-indent: 1.6ch; }
 .prompt-input::placeholder { color: var(--fg-mute); }
+
+.prompt-caret {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: pre;
+  pointer-events: none;
+}
+.caret-measure { visibility: hidden; }
+.caret-block {
+  width: .58em;
+  height: 1.15em;
+  background: var(--accent);
+  box-shadow: var(--glow);
+  animation: blink 1.05s steps(1) infinite;
+}
+/* Solid while keys are actually landing, the way a real terminal behaves. */
+.prompt-caret.typing .caret-block { animation: none; }
+/* Hollow when the prompt does not have focus. */
+.prompt-caret.blurred .caret-block {
+  background: transparent;
+  box-shadow: none;
+  border: 1px solid var(--fg-mute);
+  animation: none;
+}
 
 .prompt-hint { color: var(--fg-mute); font-size: 11.5px; white-space: nowrap; }
 

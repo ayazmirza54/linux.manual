@@ -1,4 +1,4 @@
-# tty.man
+# linux.manual
 
 An offline, terminal-styled reference for **8,921 Linux commands**, 30 topic guides
 and 16 shell tips — built from the

@@ -30,7 +30,7 @@ def main():
     socketserver.TCPServer.allow_reuse_address = True
     handler = functools.partial(Handler, directory=ROOT)
     with socketserver.TCPServer(("", args.port), handler) as httpd:
-        print("tty.man serving on http://localhost:%d  (ctrl-c to stop)" % args.port)
+        print("linux.manual serving on http://localhost:%d  (ctrl-c to stop)" % args.port)
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

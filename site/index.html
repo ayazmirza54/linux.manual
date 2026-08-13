@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-theme="phosphor">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tty.man — Linux Command Reference</title>
+<meta name="description" content="An offline, terminal-styled reference for 8,900+ Linux commands.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='2' fill='%23050806'/><path d='M3 4l3 4-3 4' stroke='%233ef08a' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/><path d='M8.5 12h4.5' stroke='%233ef08a' stroke-width='1.6' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="crt" aria-hidden="true"></div>
+
+<div class="window">
+
+  <header class="titlebar">
+    <div class="dots"><i class="dot dot-r"></i><i class="dot dot-y"></i><i class="dot dot-g"></i></div>
+    <div class="titlebar-title" id="titlebar-title">root@localhost: ~/reference</div>
+    <div class="titlebar-tools">
+      <button class="tool" id="btn-theme" title="Cycle theme (t)"><span id="theme-name">phosphor</span></button>
+      <button class="tool" id="btn-crt" title="Toggle CRT effect">crt</button>
+      <button class="tool" id="btn-help" title="Keyboard shortcuts (?)">?</button>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <nav class="sidebar" id="sidebar">
+      <div class="nav-group">
+        <div class="nav-label">// sections</div>
+        <a class="nav-item" href="#/" data-nav="home"><span class="glyph">~</span>home</a>
+        <a class="nav-item" href="#/all" data-nav="all"><span class="glyph">$</span>all commands</a>
+        <a class="nav-item" href="#/guides" data-nav="guides"><span class="glyph">#</span>guides</a>
+        <a class="nav-item" href="#/tips" data-nav="tips"><span class="glyph">!</span>tips</a>
+        <a class="nav-item" href="#/random" data-nav="random"><span class="glyph">?</span>random</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">// jump</div>
+        <div class="alpha" id="alpha"></div>
+      </div>
+      <div class="nav-group nav-recent" id="recent-group" hidden>
+        <div class="nav-label">// recent</div>
+        <div id="recent"></div>
+      </div>
+      <div class="nav-foot">
+        <div><span class="dim">pages</span> <b id="stat-commands">—</b></div>
+        <div><span class="dim">guides</span> <b id="stat-guides">—</b></div>
+        <div><span class="dim">offline</span> <b class="ok">yes</b></div>
+      </div>
+    </nav>
+
+    <main class="main">
+      <form class="promptbar" id="promptform" autocomplete="off">
+        <label class="ps1" for="prompt"><span class="ps1-user">you</span><span class="ps1-at">@</span><span class="ps1-host">tty</span><span class="ps1-path">:~$</span></label>
+        <input id="prompt" class="prompt-input" type="text" spellcheck="false"
+               placeholder="search commands, or type a command: man tar / guides / theme amber / help"
+               aria-label="Search or run a command">
+        <span class="prompt-hint" id="prompt-hint">press <kbd>/</kbd></span>
+      </form>
+
+      <div class="suggest" id="suggest" hidden></div>
+
+      <section class="view" id="view" tabindex="-1"></section>
+    </main>
+
+  </div>
+
+  <footer class="statusbar">
+    <span class="st st-mode" id="st-mode">NORMAL</span>
+    <span class="st st-path" id="st-path">~/</span>
+    <span class="st st-msg" id="st-msg"></span>
+    <span class="st st-spacer"></span>
+    <span class="st st-keys"><kbd>/</kbd> search <kbd>g</kbd> guides <kbd>r</kbd> random <kbd>t</kbd> theme <kbd>?</kbd> keys</span>
+  </footer>
+
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-box">
+    <div class="modal-head">keyboard shortcuts<button class="tool" id="modal-close">esc</button></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script src="data/meta.js"></script>
+<script src="data/index.js"></script>
+<script src="data/basics.js"></script>
+<script src="data/tips.js"></script>
+<script src="assets/js/markdown.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

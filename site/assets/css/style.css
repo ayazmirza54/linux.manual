@@ -485,6 +485,51 @@ code.inline {
 }
 .pm-row .code { flex: 1; min-width: 0; margin: 0; }
 
+/* tables */
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 0 0 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--panel);
+}
+
+.md-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+
+.md-table th,
+.md-table td {
+  padding: 5px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.md-table th {
+  color: var(--fg-mute);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: var(--panel-2);
+  border-bottom: 1px solid var(--fg-mute);
+}
+
+.md-table tbody tr:last-child td { border-bottom: 0; }
+.md-table tbody tr:hover { background: var(--panel-2); }
+
+/* The left column is the key/flag/shortcut in every table in the corpus. */
+.md-table td:first-child { color: var(--accent-2); white-space: nowrap; }
+.md-table td:first-child strong { color: var(--accent); }
+.md-table td { color: var(--fg-dim); }
+.md-table td strong { color: var(--accent-2); }
+.md-table code.inline { white-space: nowrap; }
+
 /* chips */
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }

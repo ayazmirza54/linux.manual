@@ -60,6 +60,57 @@ window.MD = (function () {
       '</div>';
   }
 
+  /* ---- tables ---------------------------------------------------------- */
+
+  function isDelimiterRow(line) {
+    var t = String(line).trim();
+    return t.charAt(0) === '|' && t.indexOf('-') !== -1 && /^\|[\s:|-]+\|?$/.test(t);
+  }
+
+  // Split a row into cells, honouring \| escapes (the corpus uses them inside
+  // cells for things like _GET\|PUT_).
+  function splitRow(line) {
+    var s = String(line).trim().replace(/^\|/, '').replace(/\|$/, '');
+    var cells = [];
+    var cur = '';
+    for (var i = 0; i < s.length; i++) {
+      var ch = s.charAt(i);
+      if (ch === '\\' && s.charAt(i + 1) === '|') { cur += '|'; i++; }
+      else if (ch === '|') { cells.push(cur.trim()); cur = ''; }
+      else cur += ch;
+    }
+    cells.push(cur.trim());
+    return cells;
+  }
+
+  function renderTable(t) {
+    var width = t.rows.reduce(function (max, r) { return Math.max(max, r.length); }, t.head.length);
+    var attr = function (i) { return t.align[i] ? ' style="text-align:' + t.align[i] + '"' : ''; };
+    var cell = function (tag, text, i) {
+      return '<' + tag + attr(i) + '>' + inline(text || '') + '</' + tag + '>';
+    };
+    var pad = function (row) {
+      var cells = row.slice(0, width);
+      while (cells.length < width) cells.push('');
+      return cells;
+    };
+
+    // Several tables carry a blank header row purely to satisfy the delimiter
+    // syntax; rendering it would leave an empty band above the data.
+    var labelled = t.head.some(function (c) { return c !== ''; });
+
+    var html = '<div class="table-wrap"><table class="md-table">';
+    if (labelled) {
+      html += '<thead><tr>' + pad(t.head).map(function (c, i) {
+        return cell('th', c, i);
+      }).join('') + '</tr></thead>';
+    }
+    html += '<tbody>' + t.rows.map(function (r) {
+      return '<tr>' + pad(r).map(function (c, i) { return cell('td', c, i); }).join('') + '</tr>';
+    }).join('') + '</tbody>';
+    return html + '</table></div>';
+  }
+
   /* ---- block scanner --------------------------------------------------- */
 
   // Walks lines and yields blocks: {type: 'code'|'quote'|'list'|'h'|'p', ...}
@@ -117,6 +168,26 @@ window.MD = (function () {
         continue;
       }
 
+      // | pipe | table |
+      // A delimiter row on the following line is required, exactly as GFM
+      // demands. That is what keeps ASCII art full of pipes from being
+      // mistaken for a table.
+      if (trimmed.charAt(0) === '|' && i + 1 < lines.length && isDelimiterRow(lines[i + 1])) {
+        flush();
+        var head = splitRow(trimmed);
+        var align = splitRow(lines[++i]).map(function (cell) {
+          var left = cell.charAt(0) === ':';
+          var right = cell.charAt(cell.length - 1) === ':';
+          return right ? (left ? 'center' : 'right') : (left ? 'left' : '');
+        });
+        var rows = [];
+        while (i + 1 < lines.length && lines[i + 1].trim().charAt(0) === '|') {
+          rows.push(splitRow(lines[++i]));
+        }
+        out.push({ type: 'table', head: head, align: align, rows: rows });
+        continue;
+      }
+
       // > description
       if (trimmed.indexOf('>') === 0) {
         flush();
@@ -151,6 +222,7 @@ window.MD = (function () {
     return blocks(src).map(function (b) {
       switch (b.type) {
         case 'code':  return codeBlock(b.text);
+        case 'table': return renderTable(b);
         case 'h':     return '<h3>' + inline(b.text) + '</h3>';
         case 'quote': return '<p class="param-desc">' + inline(b.text) + '</p>';
         case 'list':  return '<ul>' + b.items.map(function (it) {
@@ -246,6 +318,11 @@ window.MD = (function () {
   }
 
   function renderSection(title, body) {
+    // The TLDR/PARAMETERS renderers walk blocks by type and would drop a table
+    // on the floor. No section ships one today, but if the upstream data shifts
+    // it is better to lose the two-column layout than the content.
+    if (blocks(body).some(function (b) { return b.type === 'table'; })) return render(body);
+
     switch (String(title).toUpperCase()) {
       case 'TLDR':     return renderTldr(body);
       case 'PARAMETERS':

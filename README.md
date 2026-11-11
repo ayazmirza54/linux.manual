@@ -12,7 +12,8 @@ the files are on disk. It runs from a static host, a local folder, or a USB stic
 
 ```sh
 # straight from disk — no server needed
-xdg-open site/index.html
+xdg-open site/index.html    # landing page
+xdg-open site/app.html      # straight into the reference
 
 # or over http, if you prefer
 python3 serve.py            # http://localhost:8000
@@ -29,6 +30,10 @@ python3 build.py --source /tmp/lcl/assets
 
 ## What's in it
 
+`site/index.html` is the landing page; the reference itself is `site/app.html`, and
+the routes below hang off it (`app.html#/man/tar`). Old links of the form
+`/#/man/tar` are forwarded.
+
 | Route | What it shows |
 | --- | --- |
 | `#/` | Boot screen, popular commands, guide index |
@@ -37,6 +42,7 @@ python3 build.py --source /tmp/lcl/assets
 | `#/guides` · `#/guide/<id>` | The 30 topic walkthroughs (git, ssh, vim, regex, networking, …) |
 | `#/tips` | Shell tips and tricks |
 | `#/search/<query>` | Ranked search results |
+| `#/run/<line>` | Feeds a line to the prompt (used by the landing page's search boxes) |
 
 ## The prompt
 
@@ -59,11 +65,15 @@ Keys: `/` focus prompt · `↑↓` move · `⏎` open · `g` guides · `a` all �
 ```
 build.py          parses the markdown corpus into site/data/
 site/
-├── index.html    the whole app shell
+├── index.html    the landing page (static, self-contained)
+├── app.html      the whole app shell
 ├── assets/js/
 │   ├── markdown.js   renderer for the corpus' markdown dialect
 │   └── app.js        router, search, lazy loading, the prompt
-├── assets/css/style.css
+├── assets/css/
+│   ├── style.css     the app
+│   └── landing.css   the landing page
+├── assets/fonts/     self-hosted landing-page fonts (SIL OFL 1.1)
 └── data/
     ├── index.js      search index (name + tagline + example), ~740 KB
     ├── basics.js     the 30 topic guides

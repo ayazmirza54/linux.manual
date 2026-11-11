@@ -583,6 +583,8 @@ kbd.key {
   font-synthesis: none;
   line-height: 18px;
 }
+.footer b { color: var(--text); font-weight: 400; }
+.footer i { color: var(--accent); font-style: normal; }
 .footer a { color: var(--text-secondary); }
 .footer a:hover { color: var(--accent); }
 

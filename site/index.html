@@ -1,162 +1,295 @@
 <!doctype html>
-<html lang="en" data-theme="phosphor">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Primary SEO -->
-  <title>linux.manual — Linux Command Reference</title>
-  <meta
-    name="description"
-    content="An offline, terminal-styled reference for 8,900+ Linux commands."
-  >
+  <!-- Links made before the landing page existed point at the app's routes here. -->
+  <script>if (/^#\/./.test(location.hash)) location.replace('app.html' + location.hash);</script>
+
+  <title>linux.manual — every Linux command, offline</title>
+  <meta name="description" content="Every Linux command, offline: a terminal-styled reference for 8,921 commands, 30 topic guides and 16 shell tips that runs from a web server, a folder or a USB stick.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://linuxmanual.vercel.app/">
 
-  <!-- Theme -->
-  <meta name="theme-color" content="#050806">
+  <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://linuxmanual.vercel.app/">
-  <meta property="og:title" content="linux.manual — Linux Command Reference">
-  <meta
-    property="og:description"
-    content="An offline, terminal-styled reference for 8,900+ Linux commands."
-  >
+  <meta property="og:title" content="linux.manual — every Linux command, offline">
+  <meta property="og:description" content="Every Linux command, offline: a terminal-styled reference for 8,921 commands, 30 topic guides and 16 shell tips that runs from a web server, a folder or a USB stick.">
   <meta property="og:site_name" content="linux.manual">
   <meta property="og:locale" content="en_US">
-
-  <!-- Open Graph Image -->
-  <meta
-    property="og:image"
-    content="https://linuxmanual.vercel.app/assets/og-image.png"
-  >
-  <meta
-    property="og:image:secure_url"
-    content="https://linuxmanual.vercel.app/assets/og-image.png"
-  >
+  <meta property="og:image" content="https://linuxmanual.vercel.app/assets/og-image.png">
+  <meta property="og:image:secure_url" content="https://linuxmanual.vercel.app/assets/og-image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta
-    property="og:image:alt"
-    content="linux.manual — Linux Command Reference"
-  >
+  <meta property="og:image:alt" content="linux.manual — Linux Command Reference">
 
-  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta
-    name="twitter:title"
-    content="linux.manual — Linux Command Reference"
-  >
-  <meta
-    name="twitter:description"
-    content="An offline, terminal-styled reference for 8,900+ Linux commands."
-  >
-  <meta
-    name="twitter:image"
-    content="https://linuxmanual.vercel.app/assets/og-image.png"
-  >
-  <meta
-    name="twitter:image:alt"
-    content="linux.manual — Linux Command Reference"
-  >
+  <meta name="twitter:title" content="linux.manual — every Linux command, offline">
+  <meta name="twitter:description" content="Every Linux command, offline: a terminal-styled reference for 8,921 commands, 30 topic guides and 16 shell tips that runs from a web server, a folder or a USB stick.">
+  <meta name="twitter:image" content="https://linuxmanual.vercel.app/assets/og-image.png">
+  <meta name="twitter:image:alt" content="linux.manual — Linux Command Reference">
 
-  <!-- Favicon -->
-  <link
-    rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='2' fill='%23050806'/><path d='M3 4l3 4-3 4' stroke='%233ef08a' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/><path d='M8.5 12h4.5' stroke='%233ef08a' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>"
-  >
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'><rect width='16' height='16' fill='%23000'/><path d='M3 4h2v2H3zM5 6h2v2H5zM3 8h2v2H3zM8 10h5v2H8z' fill='%237fff00'/></svg>">
+  <link rel="preload" href="assets/fonts/DepartureMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/landing.css">
 </head>
 <body>
 
-<div class="crt" aria-hidden="true"></div>
+<a class="skip" href="#content">Skip to content</a>
 
-<div class="window">
+<header class="nav">
+  <nav class="nav-inner" aria-label="Main">
+    <a class="logo" href="./" aria-label="linux.manual"><span class="logo-ps1" aria-hidden="true">~$</span>linux<span class="logo-dot">.</span>manual<span class="logo-caret" aria-hidden="true">█</span></a>
+    <a class="nav-link" href="app.html#/guides">Guides</a>
+    <a class="nav-link" href="app.html#/tips">Tips</a>
+    <form class="nav-search" data-run role="search">
+      <svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M2 0h5v1h-5zM1 1h1v1h-1zM7 1h1v1h-1zM0 2h1v1h-1zM8 2h1v1h-1zM0 3h1v1h-1zM8 3h1v1h-1zM0 4h1v1h-1zM8 4h1v1h-1zM0 5h1v1h-1zM8 5h1v1h-1zM0 6h1v1h-1zM8 6h1v1h-1zM1 7h1v1h-1zM7 7h1v1h-1zM2 8h6v1h-6zM8 9h2v1h-2zM9 10h2v1h-2zM10 11h2v1h-2z"/></svg>
+      <input type="text" name="q" placeholder="Search commands..." aria-label="Search commands" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <kbd>/</kbd>
+    </form>
+    <a class="nav-icon" href="https://github.com/ayazmirza54/linux.manual" target="_blank" rel="noreferrer" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.3 2.8.2 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg><span class="sr-only">GitHub</span></a>
+  </nav>
+</header>
 
-  <header class="titlebar">
-    <div class="dots"><i class="dot dot-r"></i><i class="dot dot-y"></i><i class="dot dot-g"></i></div>
-    <div class="titlebar-title" id="titlebar-title">root@localhost: ~/reference</div>
-    <div class="titlebar-tools">
-      <button class="tool" id="btn-theme" title="Cycle theme (t)"><span id="theme-name">phosphor</span></button>
-      <button class="tool" id="btn-crt" title="Toggle CRT effect">crt</button>
-      <button class="tool" id="btn-help" title="Keyboard shortcuts (?)">?</button>
+<main class="page" id="content">
+
+  <span class="pill">Works offline, with no dependencies</span>
+  <h1>Every Linux command, offline</h1>
+  <p class="lede">A terminal-styled reference for <span data-stat="commands">8,921</span> commands, <span data-stat="guides">30</span> topic guides and <span data-stat="tips">16</span> shell tips, which runs from a web server, a folder or a USB stick.</p>
+  <p class="actions">
+    <a class="btn" href="app.html"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 1h4v1h-4zM7 1h4v1h-4zM0 2h1v1h-1zM5 2h2v1h-2zM11 2h1v1h-1zM0 3h1v1h-1zM5 3h2v1h-2zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h2v1h-2zM5 4h2v1h-2zM8 4h2v1h-2zM11 4h1v1h-1zM0 5h1v1h-1zM5 5h2v1h-2zM11 5h1v1h-1zM0 6h1v1h-1zM2 6h2v1h-2zM5 6h2v1h-2zM8 6h2v1h-2zM11 6h1v1h-1zM0 7h1v1h-1zM5 7h2v1h-2zM11 7h1v1h-1zM0 8h1v1h-1zM5 8h2v1h-2zM11 8h1v1h-1zM1 9h4v1h-4zM7 9h4v1h-4zM5 10h2v1h-2z"/></svg>Open the manual</a>
+    <a class="btn" href="https://github.com/ayazmirza54/linux.manual" target="_blank" rel="noreferrer"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M3 2h1v1h-1zM8 2h1v1h-1zM2 3h1v1h-1zM9 3h1v1h-1zM1 4h1v1h-1zM5 4h2v1h-2zM10 4h1v1h-1zM0 5h1v1h-1zM5 5h2v1h-2zM11 5h1v1h-1zM0 6h1v1h-1zM5 6h2v1h-2zM11 6h1v1h-1zM1 7h1v1h-1zM5 7h2v1h-2zM10 7h1v1h-1zM2 8h1v1h-1zM9 8h1v1h-1zM3 9h1v1h-1zM8 9h1v1h-1z"/></svg>View source</a>
+  </p>
+
+  <figure class="art"><svg viewBox="0 0 364 196" role="img" aria-labelledby="art-1"><title id="art-1">On your machine you open index.html from the site folder, with no server, no install and no network. In the browser you type man tar. The search index, 743 KB, is already loaded. crc32 of the name modulo 128 picks one bucket, 104.js, about 160 KB, and the browser reads that one file from disk while the other 127 stay there.</title><text class="m" x="7" y="11">your machine</text><rect class="f" x="7" y="14" width="350" height="176"/><rect class="bg" x="8" y="15" width="348" height="174"/><text class="m" x="14" y="33">~/site $</text><text class="t" x="77" y="33">open index.html</text><text class="d" x="14" y="51">× server</text><text class="d" x="84" y="51">× install</text><text class="d" x="161" y="51">× network</text><text class="m" x="14" y="70">browser</text><rect class="f" x="14" y="73" width="182" height="110"/><rect class="s" x="15" y="74" width="180" height="108"/><text class="m" x="21" y="92">you@linux:~$</text><text class="t" x="112" y="92">man tar</text><text class="a blink" x="168" y="92">█</text><text class="t" x="21" y="120">index.js</text><text class="a" x="105" y="120">743 KB</text><text class="t" x="21" y="141">104.js</text><text class="a" x="105" y="141">160 KB</text><text class="t" x="21" y="162">127 more</text><text class="m" x="105" y="162">on disk</text><rect class="a" x="217" y="94" width="49" height="14"/><text class="k" x="224" y="105">crc32</text><rect class="m" x="240" y="108" width="2" height="14"/><rect class="m" x="196" y="128" width="21" height="2"/><rect class="m" x="240" y="136" width="2" height="14"/><rect class="f" x="217" y="122" width="49" height="14"/><text class="t" x="224" y="133">% 128</text><rect class="f" x="213" y="150" width="56" height="14"/><text class="t" x="220" y="161">104.js</text><rect class="a pulse" x="266" y="127" width="42" height="4"/><polygon class="a pulse pulse-2" points="308,122 322,129 308,136"/><ellipse class="o" cx="338.5" cy="121.5" rx="10" ry="4"/><path class="o" d="M328.5 121.5v16a10 4 0 0 0 20 0v-16"/><path class="o" d="M328.5 129.5a10 4 0 0 0 20 0"/><text class="m" x="325" y="158">disk</text></svg></figure>
+
+  <h2 id="quick-start"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 1h2v1h-2zM1 2h4v1h-4zM1 3h6v1h-6zM1 4h8v1h-8zM1 5h10v1h-10zM1 6h10v1h-10zM1 7h8v1h-8zM1 8h6v1h-6zM1 9h4v1h-4zM1 10h2v1h-2z"/></svg> Quick start</h2>
+  <div class="install">
+    <div class="tablist" role="tablist" aria-label="Ways to run it">
+      <button class="tab" role="tab" type="button" id="tab-disk" aria-controls="panel-disk" aria-selected="true"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M0 0h10v1h-10zM0 1h1v1h-1zM2 1h1v1h-1zM7 1h1v1h-1zM9 1h2v1h-2zM0 2h1v1h-1zM2 2h1v1h-1zM7 2h1v1h-1zM10 2h2v1h-2zM0 3h1v1h-1zM2 3h6v1h-6zM11 3h1v1h-1zM0 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM2 6h8v1h-8zM11 6h1v1h-1zM0 7h1v1h-1zM2 7h1v1h-1zM9 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h4v1h-4zM9 8h1v1h-1zM11 8h1v1h-1zM0 9h1v1h-1zM2 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM2 10h1v1h-1zM4 10h4v1h-4zM9 10h1v1h-1zM11 10h1v1h-1zM0 11h12v1h-12z"/></svg>From disk</button>
+      <button class="tab" role="tab" type="button" id="tab-http" aria-controls="panel-http" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 0h10v1h-10zM0 1h1v1h-1zM11 1h1v1h-1zM0 2h12v1h-12zM0 3h1v1h-1zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM3 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM4 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM3 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM5 8h4v1h-4zM11 8h1v1h-1zM0 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM11 10h1v1h-1zM1 11h10v1h-10z"/></svg>Over HTTP</button>
+      <button class="tab" role="tab" type="button" id="tab-build" aria-controls="panel-build" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M0 0h5v1h-5zM7 0h5v1h-5zM0 1h1v1h-1zM4 1h1v1h-1zM7 1h1v1h-1zM11 1h1v1h-1zM0 2h1v1h-1zM4 2h1v1h-1zM7 2h1v1h-1zM11 2h1v1h-1zM0 3h1v1h-1zM4 3h1v1h-1zM7 3h1v1h-1zM11 3h1v1h-1zM0 4h5v1h-5zM7 4h5v1h-5zM0 7h5v1h-5zM7 7h5v1h-5zM0 8h1v1h-1zM4 8h1v1h-1zM7 8h1v1h-1zM11 8h1v1h-1zM0 9h1v1h-1zM4 9h1v1h-1zM7 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM4 10h1v1h-1zM7 10h1v1h-1zM11 10h1v1h-1zM0 11h5v1h-5zM7 11h5v1h-5z"/></svg>Rebuild the data</button>
     </div>
-  </header>
-
-  <div class="body">
-
-    <nav class="sidebar" id="sidebar">
-      <div class="nav-group">
-        <div class="nav-label">// sections</div>
-        <a class="nav-item" href="#/" data-nav="home"><span class="glyph">~</span>home</a>
-        <a class="nav-item" href="#/all" data-nav="all"><span class="glyph">$</span>all commands</a>
-        <a class="nav-item" href="#/guides" data-nav="guides"><span class="glyph">#</span>guides</a>
-        <a class="nav-item" href="#/tips" data-nav="tips"><span class="glyph">!</span>tips</a>
-        <a class="nav-item" href="#/random" data-nav="random"><span class="glyph">?</span>random</a>
-      </div>
-      <div class="nav-group">
-        <div class="nav-label">// jump</div>
-        <div class="alpha" id="alpha"></div>
-      </div>
-      <div class="nav-group nav-recent" id="recent-group" hidden>
-        <div class="nav-label">// recent</div>
-        <div id="recent"></div>
-      </div>
-      <div class="nav-foot">
-        <div><span class="dim">pages</span> <b id="stat-commands">—</b></div>
-        <div><span class="dim">guides</span> <b id="stat-guides">—</b></div>
-        <div><span class="dim">offline</span> <b class="ok">yes</b></div>
-      </div>
-    </nav>
-
-    <main class="main">
-      <form class="promptbar" id="promptform" autocomplete="off">
-        <label class="ps1" for="prompt"><span class="ps1-user">you</span><span class="ps1-at">@</span><span class="ps1-host">linux</span><span class="ps1-path">:~$</span></label>
-        <span class="prompt-wrap">
-          <input id="prompt" class="prompt-input" type="text" spellcheck="false"
-                 placeholder="search commands, or type a command: man tar / guides / theme amber / help"
-                 aria-label="Search or run a command">
-          <span class="prompt-caret" id="prompt-caret" aria-hidden="true"><span
-                class="caret-measure" id="caret-measure"></span><span class="caret-block"></span></span>
-        </span>
-        <span class="prompt-hint" id="prompt-hint">press <kbd>/</kbd></span>
-      </form>
-
-      <div class="suggest" id="suggest" hidden></div>
-
-      <section class="view" id="view" tabindex="-1"></section>
-    </main>
-
+    <div class="tabpanel" role="tabpanel" id="panel-disk" aria-labelledby="tab-disk">
+      <div class="codeblock"><pre tabindex="0"><code><span class="c"># Clone it and open the file: no server, no install</span>
+git clone https://github.com/ayazmirza54/linux.manual
+xdg-open linux.manual/site/index.html</code></pre><button class="copy" type="button">copy</button></div>
+      <p>On macOS, use <code>open</code> in place of <code>xdg-open</code>. To skip the clone, <a href="app.html">use the hosted copy</a>.</p>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="panel-http" aria-labelledby="tab-http" hidden>
+      <div class="codeblock"><pre tabindex="0"><code><span class="c"># Serve the site folder on http://localhost:8000</span>
+python3 serve.py</code></pre><button class="copy" type="button">copy</button></div>
+      <p><code>serve.py</code> needs only Python's standard library, and <code>-p</code> sets another port.</p>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="panel-build" aria-labelledby="tab-build" hidden>
+      <div class="codeblock"><pre tabindex="0"><code><span class="c"># Regenerate site/data/ from the upstream corpus</span>
+git clone --depth 1 https://github.com/SimonSchubert/LinuxCommandLibrary /tmp/lcl
+python3 build.py --source /tmp/lcl/assets</code></pre><button class="copy" type="button">copy</button></div>
+      <p><code>build.py</code> parses the corpus's markdown into the search index and the 128 buckets.</p>
+    </div>
   </div>
 
-  <footer class="statusbar">
-    <span class="st st-mode" id="st-mode">NORMAL</span>
-    <span class="st st-path" id="st-path">~/</span>
-    <span class="st st-msg" id="st-msg"></span>
-    <span class="st st-spacer"></span>
-    <span class="st st-keys"><kbd>/</kbd> search <kbd>g</kbd> guides <kbd>r</kbd> random <kbd>t</kbd> theme <kbd>?</kbd> keys</span>
-  </footer>
-
-</div>
-
-<div class="modal" id="modal" hidden>
-  <div class="modal-box">
-    <div class="modal-head">keyboard shortcuts<button class="tool" id="modal-close">esc</button></div>
-    <div class="modal-body" id="modal-body"></div>
+  <div class="features features-3">
+    <section class="feature">
+      <h3 class="pixel"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M0 2h12v1h-12zM0 3h1v1h-1zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM3 6h1v1h-1zM5 6h1v1h-1zM7 6h1v1h-1zM9 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h4v1h-4zM9 8h1v1h-1zM11 8h1v1h-1zM0 9h1v1h-1zM11 9h1v1h-1zM0 10h12v1h-12z"/></svg>1. Type a command</h3>
+      <p>Press <kbd class="key">/</kbd> and type. A command's name opens its page, and anything else searches.</p>
+      <figure class="art"><svg viewBox="0 0 254 140" role="img" aria-labelledby="art-2"><title id="art-2">At the prompt you type man tar. The tar page is suggested, and you press enter.</title><text class="m" x="7" y="11">prompt</text><rect class="f" x="7" y="14" width="240" height="120"/><rect class="bg" x="8" y="15" width="238" height="118"/><g class="typed"><text class="m" x="14" y="32">you@linux:~$</text><text class="t" x="105" y="32">man tar</text><rect class="bg type" x="105" y="22" width="49" height="13"/><g class="caret"><text class="a caret-blink" x="105" y="32">█</text></g><g class="appear"><rect class="a" x="14" y="46" width="35" height="14"/><text class="k" x="21" y="57">tar</text><text class="m" x="14" y="78">Archive and compress files</text></g><rect class="ad key" x="14" y="110" width="49" height="14"/><text class="k" x="21" y="121">enter</text></g></svg></figure>
+    </section>
+    <section class="feature">
+      <h3 class="pixel"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M0 0h10v1h-10zM0 1h1v1h-1zM2 1h1v1h-1zM7 1h1v1h-1zM9 1h2v1h-2zM0 2h1v1h-1zM2 2h1v1h-1zM7 2h1v1h-1zM10 2h2v1h-2zM0 3h1v1h-1zM2 3h6v1h-6zM11 3h1v1h-1zM0 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM2 6h8v1h-8zM11 6h1v1h-1zM0 7h1v1h-1zM2 7h1v1h-1zM9 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h4v1h-4zM9 8h1v1h-1zM11 8h1v1h-1zM0 9h1v1h-1zM2 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM2 10h1v1h-1zM4 10h4v1h-4zM9 10h1v1h-1zM11 10h1v1h-1zM0 11h12v1h-12z"/></svg>2. One bucket loads</h3>
+      <p>Each page lives in one of 128 files of about 160 KB, and the browser reads only that file.</p>
+      <figure class="art"><svg viewBox="0 0 254 140" role="img" aria-labelledby="art-3"><title id="art-3">A grid of the 128 bucket files in site/data/cmd. Only one, 104.js, lights up.</title><text class="m" x="7" y="11">site/data/cmd</text><text class="a" x="205" y="11">104.js</text><rect class="f" x="7" y="14" width="240" height="120"/><rect class="bg" x="8" y="15" width="238" height="118"/><rect class="d" x="24" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="37" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="50" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="63" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="76" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="89" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="102" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="115" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="128" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="141" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="154" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="167" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="180" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="193" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="206" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="219" y="23" width="10" height="10" opacity=".4"/><rect class="d" x="24" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="37" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="50" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="63" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="76" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="89" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="102" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="115" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="128" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="141" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="154" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="167" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="180" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="193" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="206" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="219" y="36" width="10" height="10" opacity=".4"/><rect class="d" x="24" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="37" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="50" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="63" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="76" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="89" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="102" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="115" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="128" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="141" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="154" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="167" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="180" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="193" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="206" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="219" y="49" width="10" height="10" opacity=".4"/><rect class="d" x="24" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="37" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="50" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="63" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="76" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="89" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="102" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="115" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="128" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="141" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="154" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="167" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="180" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="193" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="206" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="219" y="62" width="10" height="10" opacity=".4"/><rect class="d" x="24" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="37" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="50" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="63" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="76" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="89" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="102" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="115" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="128" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="141" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="154" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="167" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="180" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="193" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="206" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="219" y="75" width="10" height="10" opacity=".4"/><rect class="d" x="24" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="37" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="50" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="63" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="76" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="89" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="102" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="115" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="128" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="141" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="154" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="167" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="180" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="193" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="206" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="219" y="88" width="10" height="10" opacity=".4"/><rect class="d" x="24" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="37" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="50" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="63" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="76" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="89" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="102" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="115" y="101" width="10" height="10" opacity=".4"/><rect class="a pulse" x="128" y="101" width="10" height="10"/><rect class="d" x="141" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="154" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="167" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="180" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="193" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="206" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="219" y="101" width="10" height="10" opacity=".4"/><rect class="d" x="24" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="37" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="50" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="63" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="76" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="89" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="102" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="115" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="128" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="141" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="154" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="167" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="180" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="193" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="206" y="114" width="10" height="10" opacity=".4"/><rect class="d" x="219" y="114" width="10" height="10" opacity=".4"/></svg></figure>
+    </section>
+    <section class="feature">
+      <h3 class="pixel"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 1h4v1h-4zM7 1h4v1h-4zM0 2h1v1h-1zM5 2h2v1h-2zM11 2h1v1h-1zM0 3h1v1h-1zM5 3h2v1h-2zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h2v1h-2zM5 4h2v1h-2zM8 4h2v1h-2zM11 4h1v1h-1zM0 5h1v1h-1zM5 5h2v1h-2zM11 5h1v1h-1zM0 6h1v1h-1zM2 6h2v1h-2zM5 6h2v1h-2zM8 6h2v1h-2zM11 6h1v1h-1zM0 7h1v1h-1zM5 7h2v1h-2zM11 7h1v1h-1zM0 8h1v1h-1zM5 8h2v1h-2zM11 8h1v1h-1zM1 9h4v1h-4zM7 9h4v1h-4zM5 10h2v1h-2z"/></svg>3. Read the page</h3>
+      <p>Examples come first, then the synopsis, parameters, description, history, install and see-also.</p>
+      <figure class="art"><svg viewBox="0 0 254 140" role="img" aria-labelledby="art-4"><title id="art-4">The tar page: its tagline, then examples such as creating and extracting an archive, then synopsis, parameters and see also.</title><text class="m" x="7" y="11">#/man/tar</text><rect class="f" x="7" y="14" width="240" height="120"/><rect class="s" x="8" y="15" width="238" height="118"/><text class="t" x="14" y="32">tar</text><text class="m" x="42" y="32">Archive and compress files</text><text class="d" x="14" y="56"># create an archive</text><text class="a" x="14" y="70">tar czf out.tgz dir/</text><text class="d" x="14" y="92"># extract it</text><text class="a" x="14" y="106">tar xzf out.tgz</text><text class="m" x="14" y="126">synopsis  parameters  see also</text></svg></figure>
+    </section>
   </div>
-</div>
+  <p>The prompt is also a small shell: <code>guides git</code> opens a walkthrough, <code>theme amber</code> changes the colours, <code>random</code> opens a page you didn't know existed and <code>help</code> lists the rest.</p>
+
+  <h2 id="inside"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M0 0h5v1h-5zM7 0h5v1h-5zM0 1h1v1h-1zM4 1h1v1h-1zM7 1h1v1h-1zM11 1h1v1h-1zM0 2h1v1h-1zM4 2h1v1h-1zM7 2h1v1h-1zM11 2h1v1h-1zM0 3h1v1h-1zM4 3h1v1h-1zM7 3h1v1h-1zM11 3h1v1h-1zM0 4h5v1h-5zM7 4h5v1h-5zM0 7h5v1h-5zM7 7h5v1h-5zM0 8h1v1h-1zM4 8h1v1h-1zM7 8h1v1h-1zM11 8h1v1h-1zM0 9h1v1h-1zM4 9h1v1h-1zM7 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM4 10h1v1h-1zM7 10h1v1h-1zM11 10h1v1h-1zM0 11h5v1h-5zM7 11h5v1h-5z"/></svg> What's inside</h2>
+  <div class="features features-3">
+    <section class="feature">
+      <h3 class="pixel"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 0h10v1h-10zM0 1h1v1h-1zM11 1h1v1h-1zM0 2h12v1h-12zM0 3h1v1h-1zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM3 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM4 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM3 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM5 8h4v1h-4zM11 8h1v1h-1zM0 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM11 10h1v1h-1zM1 11h10v1h-10z"/></svg>Commands</h3>
+      <p><span data-stat="commands">8,921</span> pages, from <code>tar</code> and <code>grep</code> to tools you have never heard of, each with examples to copy (<a href="app.html#/all">all commands</a>).</p>
+      <figure class="art"><svg viewBox="0 0 254 62" role="img" aria-labelledby="art-5"><title id="art-5">Command chips: tar, grep, ssh, awk, sed, curl, find, chmod, rsync, and 8,912 more.</title><rect class="a lit-chip" x="7" y="4" width="35" height="14"/><text class="k" x="14" y="15">tar</text><rect class="a lit-chip lit-2" x="49" y="4" width="42" height="14"/><text class="k" x="56" y="15">grep</text><rect class="a lit-chip lit-3" x="98" y="4" width="35" height="14"/><text class="k" x="105" y="15">ssh</text><rect class="a lit-chip lit-4" x="140" y="4" width="35" height="14"/><text class="k" x="147" y="15">awk</text><rect class="a lit-chip lit-5" x="182" y="4" width="35" height="14"/><text class="k" x="189" y="15">sed</text><rect class="ad" x="7" y="25" width="42" height="14"/><text class="k" x="14" y="36">curl</text><rect class="ad" x="56" y="25" width="42" height="14"/><text class="k" x="63" y="36">find</text><rect class="ad" x="105" y="25" width="49" height="14"/><text class="k" x="112" y="36">chmod</text><rect class="ad" x="161" y="25" width="49" height="14"/><text class="k" x="168" y="36">rsync</text><text class="m" x="7" y="58">+ 8,912 more</text></svg></figure>
+    </section>
+    <section class="feature">
+      <h3 class="pixel"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 1h4v1h-4zM7 1h4v1h-4zM0 2h1v1h-1zM5 2h2v1h-2zM11 2h1v1h-1zM0 3h1v1h-1zM5 3h2v1h-2zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h2v1h-2zM5 4h2v1h-2zM8 4h2v1h-2zM11 4h1v1h-1zM0 5h1v1h-1zM5 5h2v1h-2zM11 5h1v1h-1zM0 6h1v1h-1zM2 6h2v1h-2zM5 6h2v1h-2zM8 6h2v1h-2zM11 6h1v1h-1zM0 7h1v1h-1zM5 7h2v1h-2zM11 7h1v1h-1zM0 8h1v1h-1zM5 8h2v1h-2zM11 8h1v1h-1zM1 9h4v1h-4zM7 9h4v1h-4zM5 10h2v1h-2z"/></svg>Guides</h3>
+      <p><span data-stat="guides">30</span> walkthroughs that group commands by job, such as git, ssh, tmux, vim, JSON and networking (<a href="app.html#/guides">guides</a>).</p>
+      <figure class="art"><svg viewBox="0 0 254 62" role="img" aria-labelledby="art-6"><title id="art-6">Guide chips: git, ssh, tmux, vim, json, network, shell scripting, and 23 more.</title><rect class="f" x="7" y="4" width="35" height="14"/><text class="t" x="14" y="15">git</text><rect class="f" x="49" y="4" width="35" height="14"/><text class="t" x="56" y="15">ssh</text><rect class="f" x="91" y="4" width="42" height="14"/><text class="t" x="98" y="15">tmux</text><rect class="f" x="140" y="4" width="35" height="14"/><text class="t" x="147" y="15">vim</text><rect class="f" x="182" y="4" width="42" height="14"/><text class="t" x="189" y="15">json</text><rect class="f" x="7" y="25" width="63" height="14"/><text class="t" x="14" y="36">network</text><rect class="f" x="77" y="25" width="119" height="14"/><text class="t" x="84" y="36">shell scripting</text><text class="m" x="7" y="58">+ 23 more</text></svg></figure>
+    </section>
+    <section class="feature">
+      <h3 class="pixel"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M3 0h6v1h-6zM2 1h1v1h-1zM9 1h1v1h-1zM1 2h1v1h-1zM5 2h2v1h-2zM10 2h1v1h-1zM1 3h1v1h-1zM5 3h2v1h-2zM10 3h1v1h-1zM1 4h1v1h-1zM5 4h2v1h-2zM10 4h1v1h-1zM1 5h1v1h-1zM5 5h2v1h-2zM10 5h1v1h-1zM1 6h1v1h-1zM10 6h1v1h-1zM2 7h1v1h-1zM5 7h2v1h-2zM9 7h1v1h-1zM3 8h1v1h-1zM8 8h1v1h-1zM3 9h6v1h-6zM4 10h1v1h-1zM7 10h1v1h-1zM4 11h4v1h-4z"/></svg>Tips</h3>
+      <p><span data-stat="tips">16</span> shell habits worth knowing, such as searching your history or resetting a garbled terminal (<a href="app.html#/tips">tips</a>).</p>
+      <figure class="art"><svg viewBox="0 0 254 62" role="img" aria-labelledby="art-7"><title id="art-7">A tip: search your history with history piped to grep. 15 more tips.</title><rect class="f" x="7" y="4" width="240" height="36"/><rect class="s" x="8" y="5" width="238" height="34"/><text class="d" x="14" y="19"># search your history</text><text class="t" x="14" y="33">history | grep</text><text class="m" x="119" y="33">[query]</text><text class="m" x="7" y="58">+ 15 more</text></svg></figure>
+    </section>
+  </div>
+
+  <h2 id="why"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M6 0h3v1h-3zM5 1h3v1h-3zM4 2h3v1h-3zM3 3h3v1h-3zM2 4h8v1h-8zM1 5h8v1h-8zM5 6h3v1h-3zM4 7h3v1h-3zM3 8h3v1h-3zM2 9h3v1h-3zM1 10h2v1h-2zM1 11h1v1h-1z"/></svg> Why offline?</h2>
+  <div class="beside">
+    <ul class="dash">
+      <li>You often need a man page when the network is gone: on a broken router, an air-gapped box or a train.</li>
+      <li>A static site can't <code>fetch()</code> its data from a <code>file://</code> URL, because the browser blocks the request as cross-origin.</li>
+      <li>Script tags were never bound by that rule, so each bucket is a script and loads the same from a server, a folder or a USB stick.</li>
+      <li>Opening a page costs one local read of about 160 KB, where the whole corpus is a 20 MB download.</li>
+    </ul>
+    <figure class="art"><svg viewBox="0 0 364 150" role="img" aria-labelledby="art-8"><title id="art-8">Two panels opened from a file URL. With fetch, man tar, man grep and man ssh are each blocked by CORS and no page loads. With script tags, each one loads its bucket, 104.js, 070.js and 068.js, and every page loads.</title><text class="m" x="7" y="11">with fetch()</text><rect class="f" x="7" y="14" width="168" height="130"/><rect class="bg" x="8" y="15" width="166" height="128"/><text class="m" x="14" y="33">file:///…/site/</text><text class="a" x="189" y="11">with script tags</text><rect class="f" x="189" y="14" width="168" height="130"/><rect class="s" x="190" y="15" width="166" height="128"/><text class="m" x="196" y="33">file:///…/site/</text><text class="t" x="14" y="60">man tar</text><text class="r blocked" x="91" y="60">× CORS</text><text class="t" x="196" y="60">man tar</text><rect class="a lit-chip" x="273" y="49" width="56" height="14"/><text class="k" x="280" y="60">104.js</text><text class="t" x="14" y="80">man grep</text><text class="r blocked blocked-2" x="91" y="80">× CORS</text><text class="t" x="196" y="80">man grep</text><rect class="a lit-chip lit-3" x="273" y="69" width="56" height="14"/><text class="k" x="280" y="80">070.js</text><text class="t" x="14" y="100">man ssh</text><text class="r blocked blocked-3" x="91" y="100">× CORS</text><text class="t" x="196" y="100">man ssh</text><rect class="a lit-chip lit-5" x="273" y="89" width="56" height="14"/><text class="k" x="280" y="100">068.js</text><text class="r" x="14" y="132">no page loads</text><text class="a" x="196" y="132">every page loads</text></svg></figure>
+  </div>
+
+  <div class="features bento">
+    <div class="bento-col">
+      <section class="feature">
+        <h2><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 0h10v1h-10zM0 1h1v1h-1zM11 1h1v1h-1zM0 2h12v1h-12zM0 3h1v1h-1zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM3 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM4 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM3 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM5 8h4v1h-4zM11 8h1v1h-1zM0 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM11 10h1v1h-1zM1 11h10v1h-10z"/></svg>The prompt is a shell</h2>
+        <ul class="dash">
+          <li>Type a command's name to open its page, or anything else to search names, taglines and examples.</li>
+          <li>Builtins do the rest: <code>man</code>, <code>ls</code>, <code>search</code>, <code>guides</code>, <code>tips</code>, <code>random</code>, <code>history</code> and <code>help</code>.</li>
+          <li>Every page has an address, such as <code>#/man/tar</code>, that you can bookmark or share.</li>
+        </ul>
+        <figure class="art"><svg viewBox="0 0 364 122" role="img" aria-labelledby="art-9"><title id="art-9">Three lines typed at the prompt: man tar opens the tar page, guides git opens the git guide, and theme amber switches the theme to amber.</title><rect class="f" x="7" y="4" width="350" height="114"/><rect class="s" x="8" y="5" width="348" height="112"/><text class="m" x="14" y="23">you@linux:~$</text><text class="t" x="105" y="23">man tar</text><text class="d" x="105" y="39">→ #/man/tar</text><text class="m" x="14" y="59">you@linux:~$</text><text class="t" x="105" y="59">guides git</text><text class="d" x="105" y="75">→ #/guide/git</text><text class="m" x="14" y="95">you@linux:~$</text><text class="t" x="105" y="95">theme amber</text><text class="a" x="105" y="111">theme → amber</text></svg></figure>
+      </section>
+      <section class="feature">
+        <h2><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M0 2h12v1h-12zM0 3h1v1h-1zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM3 6h1v1h-1zM5 6h1v1h-1zM7 6h1v1h-1zM9 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h4v1h-4zM9 8h1v1h-1zM11 8h1v1h-1zM0 9h1v1h-1zM11 9h1v1h-1zM0 10h12v1h-12z"/></svg>Keyboard first</h2>
+        <ul class="dash">
+          <li><kbd class="key">/</kbd> focuses the prompt from anywhere, <kbd class="key">↑</kbd> <kbd class="key">↓</kbd> move through suggestions and <kbd class="key">⏎</kbd> opens one.</li>
+          <li>Single keys jump around, and <kbd class="key">?</kbd> lists them all.</li>
+        </ul>
+        <figure class="art"><svg viewBox="0 0 364 56" role="img" aria-labelledby="art-12"><title id="art-12">Keys: slash for search, g for guides, a for all commands, r for random, t for theme, c for the CRT overlay and question mark for the list of keys.</title><rect class="f" x="7" y="4" width="21" height="18"/><rect class="s" x="8" y="5" width="19" height="16"/><text class="a" x="14" y="17">/</text><text class="m" x="35" y="17">search</text><rect class="f" x="95" y="4" width="21" height="18"/><rect class="s" x="96" y="5" width="19" height="16"/><text class="a" x="102" y="17">g</text><text class="m" x="123" y="17">guides</text><rect class="f" x="183" y="4" width="21" height="18"/><rect class="s" x="184" y="5" width="19" height="16"/><text class="a" x="190" y="17">a</text><text class="m" x="211" y="17">all</text><rect class="f" x="271" y="4" width="21" height="18"/><rect class="s" x="272" y="5" width="19" height="16"/><text class="a" x="278" y="17">r</text><text class="m" x="299" y="17">random</text><rect class="f" x="7" y="34" width="21" height="18"/><rect class="s" x="8" y="35" width="19" height="16"/><text class="a" x="14" y="47">t</text><text class="m" x="35" y="47">theme</text><rect class="f" x="95" y="34" width="21" height="18"/><rect class="s" x="96" y="35" width="19" height="16"/><text class="a" x="102" y="47">c</text><text class="m" x="123" y="47">crt</text><rect class="f" x="183" y="34" width="21" height="18"/><rect class="s" x="184" y="35" width="19" height="16"/><text class="a" x="190" y="47">?</text><text class="m" x="211" y="47">keys</text></svg></figure>
+      </section>
+    </div>
+    <div class="bento-col">
+      <section class="feature">
+        <h2><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M0 0h10v1h-10zM0 1h1v1h-1zM2 1h1v1h-1zM7 1h1v1h-1zM9 1h2v1h-2zM0 2h1v1h-1zM2 2h1v1h-1zM7 2h1v1h-1zM10 2h2v1h-2zM0 3h1v1h-1zM2 3h6v1h-6zM11 3h1v1h-1zM0 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM2 6h8v1h-8zM11 6h1v1h-1zM0 7h1v1h-1zM2 7h1v1h-1zM9 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h4v1h-4zM9 8h1v1h-1zM11 8h1v1h-1zM0 9h1v1h-1zM2 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM2 10h1v1h-1zM4 10h4v1h-4zM9 10h1v1h-1zM11 10h1v1h-1zM0 11h12v1h-12z"/></svg>Runs from file://</h2>
+        <ul class="dash">
+          <li>There is no framework, no build tooling and no runtime dependency: it is vanilla JavaScript, two stylesheets and a Python build script.</li>
+          <li>The search index, 743 KB, loads up front, so search never waits on a request.</li>
+          <li>Page bodies are keyed into buckets by <code>crc32(name) % 128</code>, the same function in <code>build.py</code> and <code>app.js</code>.</li>
+        </ul>
+        <figure class="art"><svg viewBox="0 0 364 116" role="img" aria-labelledby="art-10"><title id="art-10">The search index, index.js at 743 KB, points to bucket files: cmd/068.js holds ssh, cmd/070.js holds grep and cmd/104.js holds tar. The bucket is crc32 of the name modulo 128.</title><rect class="f" x="7" y="28" width="84" height="44"/><rect class="s" x="8" y="29" width="82" height="42"/><text class="t" x="14" y="46">index.js</text><text class="m" x="14" y="62">743 KB</text><rect class="a pulse" x="98" y="48" width="28" height="4"/><polygon class="a pulse pulse-2" points="126,43 140,50 126,57"/><rect class="a" x="154" y="4" width="2" height="22"/><rect class="f" x="156" y="4" width="201" height="22"/><rect class="s" x="157" y="5" width="199" height="20"/><text class="t" x="163" y="19">cmd/068.js</text><rect class="lit" x="247" y="12" width="6" height="6"/><text class="m" x="259" y="19">ssh</text><rect class="a" x="154" y="35" width="2" height="22"/><rect class="f" x="156" y="35" width="201" height="22"/><rect class="s" x="157" y="36" width="199" height="20"/><text class="t" x="163" y="50">cmd/070.js</text><rect class="lit lit-3" x="247" y="43" width="6" height="6"/><text class="m" x="259" y="50">grep</text><rect class="a" x="154" y="66" width="2" height="22"/><rect class="f" x="156" y="66" width="201" height="22"/><rect class="s" x="157" y="67" width="199" height="20"/><text class="t" x="163" y="81">cmd/104.js</text><rect class="lit lit-5" x="247" y="74" width="6" height="6"/><text class="m" x="259" y="81">tar</text><text class="m" x="7" y="109">bucket =</text><rect class="f" x="70" y="98" width="133" height="14"/><text class="t" x="77" y="109">crc32(name) % 128</text></svg></figure>
+      </section>
+      <section class="feature">
+        <h2><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M3 0h6v1h-6zM2 1h1v1h-1zM6 1h4v1h-4zM1 2h1v1h-1zM6 2h5v1h-5zM0 3h1v1h-1zM6 3h6v1h-6zM0 4h1v1h-1zM6 4h6v1h-6zM0 5h1v1h-1zM6 5h6v1h-6zM0 6h1v1h-1zM6 6h6v1h-6zM0 7h1v1h-1zM6 7h6v1h-6zM0 8h1v1h-1zM6 8h6v1h-6zM1 9h1v1h-1zM6 9h5v1h-5zM2 10h1v1h-1zM6 10h4v1h-4zM3 11h6v1h-6z"/></svg>Four themes</h2>
+        <ul class="dash">
+          <li>Phosphor, amber, ice and paper are token swaps, so <kbd class="key">t</kbd> or <code>theme ice</code> changes the theme in place.</li>
+          <li><code>crt</code> toggles a scanline overlay for the full terminal look.</li>
+        </ul>
+        <figure class="art"><svg viewBox="0 0 364 62" role="img" aria-labelledby="art-11"><title id="art-11">Four small terminals in the four themes: phosphor green, amber, ice blue and paper, which is light.</title><rect x="7" y="4" width="80" height="40" style="fill:#17301c"/><rect x="8" y="5" width="78" height="38" style="fill:#050806"/><text class="x" x="14" y="21" style="fill:#3ef08a">$</text><text class="x" x="28" y="21" style="fill:#b8f5cd">man tar</text><rect x="14" y="28" width="7" height="11" style="fill:#3ef08a"/><text class="m" x="7" y="58">phosphor</text><rect x="97" y="4" width="80" height="40" style="fill:#3a2708"/><rect x="98" y="5" width="78" height="38" style="fill:#0a0703"/><text class="x" x="104" y="21" style="fill:#ffb000">$</text><text class="x" x="118" y="21" style="fill:#ffd79a">man tar</text><rect x="104" y="28" width="7" height="11" style="fill:#ffb000"/><text class="m" x="97" y="58">amber</text><rect x="187" y="4" width="80" height="40" style="fill:#143046"/><rect x="188" y="5" width="78" height="38" style="fill:#04070d"/><text class="x" x="194" y="21" style="fill:#58c7ff">$</text><text class="x" x="208" y="21" style="fill:#cfe8ff">man tar</text><rect x="194" y="28" width="7" height="11" style="fill:#58c7ff"/><text class="m" x="187" y="58">ice</text><rect x="277" y="4" width="80" height="40" style="fill:#d8d2c0"/><rect x="278" y="5" width="78" height="38" style="fill:#f4f1e8"/><text class="x" x="284" y="21" style="fill:#1f7a4d">$</text><text class="x" x="298" y="21" style="fill:#23211c">man tar</text><rect x="284" y="28" width="7" height="11" style="fill:#1f7a4d"/><text class="m" x="277" y="58">paper</text></svg></figure>
+      </section>
+    </div>
+  </div>
+
+  <h2 id="faq"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 0h10v1h-10zM0 1h1v1h-1zM11 1h1v1h-1zM0 2h1v1h-1zM4 2h4v1h-4zM11 2h1v1h-1zM0 3h1v1h-1zM3 3h1v1h-1zM8 3h1v1h-1zM11 3h1v1h-1zM0 4h1v1h-1zM7 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM6 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM11 8h1v1h-1zM1 9h3v1h-3zM6 9h5v1h-5zM3 10h1v1h-1zM5 10h1v1h-1zM3 11h2v1h-2z"/></svg> FAQ</h2>
+  <h3>Where do the commands come from?</h3>
+  <p>From the <a href="https://github.com/SimonSchubert/LinuxCommandLibrary" target="_blank" rel="noreferrer">Linux Command Library</a> by Simon Schubert, an open-source corpus of command pages, guides and tips. linux.manual is a reader for it, and <code>build.py</code> turns the corpus's markdown into the data files.</p>
+  <h3>Does it need a server?</h3>
+  <p>No. Open <code>site/index.html</code> from disk and everything works, search included. It also runs on any static host, and <code>serve.py</code> is there if you prefer <code>localhost</code>.</p>
+  <h3>How big is it?</h3>
+  <p>The page bodies are 20.3 MB, split across 128 buckets of about 160 KB each, and the search index is another 743 KB. Only the index loads up front.</p>
+  <h3>Does it call out to anything?</h3>
+  <p>No. There are no analytics, no CDN and no web-font requests, because the fonts and every page ship in the folder.</p>
+
+  <h2 id="start"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 0h10v1h-10zM0 1h1v1h-1zM11 1h1v1h-1zM0 2h12v1h-12zM0 3h1v1h-1zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM3 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM4 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM3 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM5 8h4v1h-4zM11 8h1v1h-1zM0 9h1v1h-1zM11 9h1v1h-1zM0 10h1v1h-1zM11 10h1v1h-1zM1 11h10v1h-10z"/></svg> Look something up</h2>
+  <p>Type a command's name, or anything you want to search for.</p>
+  <form class="prompt" data-run>
+    <label for="prompt">you@linux:~$</label>
+    <input id="prompt" type="text" name="q" placeholder="man tar" aria-label="Search or run a command" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <button type="submit">enter</button>
+  </form>
+  <p class="actions">
+    <a class="btn" href="app.html"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M1 1h4v1h-4zM7 1h4v1h-4zM0 2h1v1h-1zM5 2h2v1h-2zM11 2h1v1h-1zM0 3h1v1h-1zM5 3h2v1h-2zM11 3h1v1h-1zM0 4h1v1h-1zM2 4h2v1h-2zM5 4h2v1h-2zM8 4h2v1h-2zM11 4h1v1h-1zM0 5h1v1h-1zM5 5h2v1h-2zM11 5h1v1h-1zM0 6h1v1h-1zM2 6h2v1h-2zM5 6h2v1h-2zM8 6h2v1h-2zM11 6h1v1h-1zM0 7h1v1h-1zM5 7h2v1h-2zM11 7h1v1h-1zM0 8h1v1h-1zM5 8h2v1h-2zM11 8h1v1h-1zM1 9h4v1h-4zM7 9h4v1h-4zM5 10h2v1h-2z"/></svg>Open the manual</a>
+    <a class="btn" href="https://github.com/ayazmirza54/linux.manual" target="_blank" rel="noreferrer"><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 12 12"><path d="M3 2h1v1h-1zM8 2h1v1h-1zM2 3h1v1h-1zM9 3h1v1h-1zM1 4h1v1h-1zM5 4h2v1h-2zM10 4h1v1h-1zM0 5h1v1h-1zM5 5h2v1h-2zM11 5h1v1h-1zM0 6h1v1h-1zM5 6h2v1h-2zM11 6h1v1h-1zM1 7h1v1h-1zM5 7h2v1h-2zM10 7h1v1h-1zM2 8h1v1h-1zM9 8h1v1h-1zM3 9h1v1h-1zM8 9h1v1h-1z"/></svg>View source</a>
+  </p>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>linux.manual</span>
+    <span>Command data from the <a href="https://github.com/SimonSchubert/LinuxCommandLibrary" target="_blank" rel="noreferrer">Linux Command Library</a> by Simon Schubert</span>
+  </div>
+</footer>
 
 <script src="data/meta.js"></script>
-<script src="data/index.js"></script>
-<script src="data/basics.js"></script>
-<script src="data/tips.js"></script>
-<script src="assets/js/markdown.js"></script>
-<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // Counts come from the generated data, so a rebuild keeps the copy honest.
+  var meta = window.LCL_META || {};
+  document.querySelectorAll('[data-stat]').forEach(function (n) {
+    var v = meta[n.dataset.stat];
+    if (typeof v === 'number') n.textContent = v.toLocaleString('en-US');
+  });
+
+  // Search boxes hand their line to the app's prompt.
+  document.querySelectorAll('form[data-run]').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var q = f.elements.q.value.trim();
+      location.href = 'app.html' + (q ? '#/run/' + encodeURIComponent(q) : '');
+    });
+  });
+
+  // "/" focuses search, as it does in the app.
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    var nav = document.querySelector('.nav-search input');
+    var box = nav && nav.offsetParent ? nav : document.getElementById('prompt');
+    e.preventDefault();
+    box.focus();
+  });
+
+  // Tabs.
+  var tabs = [].slice.call(document.querySelectorAll('[role=tab]'));
+  function select(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+    });
+  });
+
+  // Copy buttons.
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var lines = b.previousElementSibling.textContent.split('\n').filter(function (l) { return l.charAt(0) !== '#'; });
+      var text = lines.join('\n');
+      function done() {
+        b.textContent = 'copied';
+        b.classList.add('copied');
+        setTimeout(function () { b.textContent = 'copy'; b.classList.remove('copied'); }, 1500);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>

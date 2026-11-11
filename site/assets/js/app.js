@@ -315,6 +315,16 @@
 
   function render() {
     var r = route();
+    // #/run/<line> feeds a line to the prompt — the landing page's search
+    // boxes use it. Swap the entry for home first so "back" does not re-run it.
+    if (r.name === 'run') {
+      try { history.replaceState(null, '', location.pathname + location.search + '#/'); }
+      catch (err) { location.hash = '#/'; }
+      exec(r.arg);
+      if (route().name === 'run') return;
+      r = route();
+      if (r.name !== 'home') return;
+    }
     var views = {
       home: viewHome, all: viewAll, guides: viewGuides, guide: viewGuide,
       tips: viewTips, man: viewMan, search: viewSearch, about: viewAbout,
